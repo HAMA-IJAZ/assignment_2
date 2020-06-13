@@ -1,48 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import Message from './message'
 
-class MyForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      age: null,
-    };
-  }
-  mySubmitHandler = (event) => {
-    event.preventDefault();
-    let age = this.state.age;
-    if (!Number(age)) {
-      alert("Your age must be a number");
-    }
-  }
-  myChangeHandler = (event) => {
-    let nam = event.target.name;
-    let val = event.target.value;
-    this.setState({[nam]: val});
-  }
-  render() {
-    return (
-      <form onSubmit={this.mySubmitHandler}>
-      <h1>Hello {this.state.username} {this.state.age}</h1>
-      <p>Enter your name:</p>
-      <input
-        type='text'
-        name='username'
-        onChange={this.myChangeHandler}
-      />
-      <p>Enter your age:</p>
-      <input
-        type='text'
-        name='age'
-        onChange={this.myChangeHandler}
-      />
-      <br/>
-      <br/>
-      <input type='submit' />
-      </form>
-    );
-  }
+function App() {
+  let [count, setcount] = useState(1)
+  let [isMorning, setMorning] = useState(false)
+  return (
+    <div className="App">
+      <header className={`App-header ${isMorning ? 'daylight' : ''}`}>
+        <img src={logo} className="App-logo" alt="logo" />
+        <h3> {isMorning ? "Good Morning Saad Ali" : "Good Night Saad Ali"}</h3>
+        <Message counter={count} />
+        <button onClick={() => setcount(++count)}>Increment Counter</button>
+        <br />
+        <button onClick={() => setMorning(!isMorning)}>Update Day & Night</button>
+      </header>
+    </div>
+  );
 }
 
-ReactDOM.render(<MyForm />, document.getElementById('root'));
+export default App;
