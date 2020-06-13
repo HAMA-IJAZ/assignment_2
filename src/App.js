@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Message from './message'
+
 
 function App() {
   let [count, setcount] = useState(1)
